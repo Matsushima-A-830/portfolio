@@ -10,11 +10,36 @@
 | ターゲット | メイン: 日本の10〜20代のカフェ好き ／ サブ: 個人経営のカフェオーナー |
 | リポジトリ | 非公開（このページで設計と判断を公開。選考時は画面共有で説明可能） |
 
-<!-- TODO(本人記入): スクリーンショットを assets/mitsu-cafe/ に置いたら、下のコメントを外してファイル名を合わせる
-| ホーム（気分の入り口） | カフェ詳細 | オーナーダッシュボード | スマホ表示 |
+## 画面
+
+> ローカル環境のテストデータで撮影。開発用ツールの表示と住所を加工で消しています。
+
+### ホーム — 「今、どんなカフェ気分？」から始まる
+![PC版ホーム](../assets/mitsu-cafe/pc-home.webp)
+
+### スマホ表示
+
+| ホーム（未ログイン） | ホーム（ログイン後） | カフェ詳細 | オーナーダッシュボード |
 |---|---|---|---|
-| ![ホーム](../assets/mitsu-cafe/home.png) | ![カフェ詳細](../assets/mitsu-cafe/cafe-detail.png) | ![オーナーダッシュボード](../assets/mitsu-cafe/owner-dashboard.png) | ![スマホ表示](../assets/mitsu-cafe/mobile.png) |
--->
+| ![スマホ版ホーム](../assets/mitsu-cafe/mobile-home.webp) | ![スマホ版ホーム（ログイン後）](../assets/mitsu-cafe/mobile-home-loggedin.webp) | ![スマホ版カフェ詳細](../assets/mitsu-cafe/mobile-cafe-detail.webp) | ![スマホ版オーナーダッシュボード](../assets/mitsu-cafe/mobile-owner-dashboard.webp) |
+
+### カフェ詳細 — オーナー公式投稿・営業時間・地図・混雑度
+![カフェ詳細](../assets/mitsu-cafe/pc-cafe-detail.webp)
+
+### 地図から探す — エリア・雰囲気・利用機会で絞り込み
+![地図](../assets/mitsu-cafe/pc-map.webp)
+
+### ブログ投稿 — Tiptap によるリッチテキスト
+![ブログ投稿](../assets/mitsu-cafe/pc-post-blog.webp)
+
+### オーナー向け — ダッシュボードと投稿分析
+
+| ダッシュボード | 投稿分析 |
+|---|---|
+| ![オーナーダッシュボード](../assets/mitsu-cafe/pc-owner-dashboard.webp) | ![投稿分析](../assets/mitsu-cafe/pc-owner-analytics.webp) |
+
+### バッジ — シーン開拓などのゲーミフィケーション
+![バッジ](../assets/mitsu-cafe/pc-badges.webp)
 
 ---
 

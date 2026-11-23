@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matsushima-A-830 — Portfolio</title>
+<meta name="description" content="ITエンジニア1年目。カフェ特化SNS「ミツカフェ」を企画から本番運用まで個人開発。AI検証100日チャレンジ、LLMメモリベンチマーク。">
+<meta property="og:title" content="Matsushima-A-830 — Portfolio">
+<meta property="og:description" content="設計をドキュメントで固め、テストとCIで守り、AIエージェントと分業して速く回す。">
+<meta property="og:type" content="website">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf7f2;
+  --surface: #ffffff;
+  --surface-2: #f3ede4;
+  --text: #2b2118;
+  --muted: #6f6257;
+  --border: #e6ddd1;
+  --accent: #8a5a36;
+  --accent-soft: #f1e4d6;
+  --accent-text: #fff;
+  --ok: #3f7a52;
+  --shadow: 0 1px 2px rgba(43,33,24,.05), 0 8px 24px rgba(43,33,24,.06);
+  --radius: 16px;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17130f;
+    --surface: #211b16;
+    --surface-2: #2a231c;
+    --text: #f1e9df;
+    --muted: #b3a597;
+    --border: #3a3027;
+    --accent: #d9a273;
+    --accent-soft: #3a2b1f;
+    --accent-text: #1b140e;
+    --ok: #7fc293;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #17130f;
+  --surface: #211b16;
+  --surface-2: #2a231c;
+  --text: #f1e9df;
+  --muted: #b3a597;
+  --border: #3a3027;
+  --accent: #d9a273;
+  --accent-soft: #3a2b1f;
+  --accent-text: #1b140e;
+  --ok: #7fc293;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Noto Sans JP", system-ui, -apple-system, "Hiragino Sans", sans-serif;
+  line-height: 1.8;
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+img { max-width: 100%; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+@media (min-width: 720px) { .wrap { padding: 0 32px; } }
+
+/* header */
+header.top {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
+.brand { font-weight: 700; color: var(--text); text-decoration: none; font-family: var(--mono); font-size: 14px; white-space: nowrap; }
+nav.links { display: flex; gap: 20px; font-size: 14px; }
+nav.links a { color: var(--muted); text-decoration: none; }
+nav.links a:hover { color: var(--text); }
+@media (max-width: 719px) { nav.links .opt { display: none; } }
+.theme-btn {
+  border: 1px solid var(--border); background: var(--surface); color: var(--text);
+  border-radius: 999px; width: 36px; height: 36px; cursor: pointer; flex: none; display: inline-grid; place-items: center;
+}
+
+/* hero */
+.hero { padding-top: 72px; padding-bottom: 48px; }
+.eyebrow { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: .04em; margin: 0 0 16px; }
+.hero h1 span, .hero h1 em { display: inline-block; }
+.hero h1 { font-size: clamp(25px, 5.2vw, 52px); line-height: 1.3; margin: 0 0 24px; font-weight: 900; letter-spacing: -.01em; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero p.lead { font-size: clamp(16px, 2vw, 18px); color: var(--muted); max-width: 720px; margin: 0 0 32px; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px;
+  text-decoration: none; font-weight: 500; font-size: 15px; border: 1px solid var(--border); color: var(--text); background: var(--surface);
+}
+.btn.primary { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+
+/* sections */
+section { padding: 56px 0; }
+section + section { border-top: 1px solid var(--border); }
+h2 { font-size: clamp(22px, 3vw, 30px); margin: 0 0 8px; font-weight: 900; }
+.sub { color: var(--muted); margin: 0 0 32px; }
+h3 { font-size: 18px; margin: 0 0 8px; line-height: 1.5; }
+
+/* about */
+.about { display: grid; gap: 24px; }
+@media (min-width: 860px) { .about { grid-template-columns: 1.4fr 1fr; } }
+.about p { margin: 0 0 16px; }
+.facts { align-self: start; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+.facts dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; font-size: 15px; }
+.facts dt { color: var(--muted); }
+.facts dd { margin: 0; }
+
+/* featured project */
+.featured {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 24px; box-shadow: var(--shadow);
+  overflow: hidden; margin-bottom: 24px;
+}
+.featured-head { padding: 32px 24px 24px; background: linear-gradient(135deg, var(--accent-soft), transparent 70%); }
+@media (min-width: 720px) { .featured-head { padding: 40px 40px 32px; } }
+.tag { display: inline-block; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 999px; background: var(--accent); color: var(--accent-text); margin-right: 8px; }
+.tag.ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); font-weight: 500; }
+.featured h3 { font-size: clamp(22px, 3.4vw, 32px); margin: 16px 0 8px; font-weight: 900; }
+.featured .tagline { font-size: 17px; margin: 0 0 16px; }
+.featured .desc { color: var(--muted); margin: 0; max-width: 760px; }
+.stats { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--border); }
+@media (min-width: 720px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+.stat { padding: 20px 24px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.stat:nth-child(2n) { border-right: none; }
+@media (min-width: 720px) {
+  .stat { border-bottom: none; }
+  .stat:nth-child(2n) { border-right: 1px solid var(--border); }
+  .stat:nth-child(4n) { border-right: none; }
+}
+.stat b { display: block; font-size: 28px; font-weight: 900; font-family: var(--mono); line-height: 1.3; }
+.stat span { font-size: 13px; color: var(--muted); }
+.featured-body { padding: 24px; display: grid; gap: 24px; }
+@media (min-width: 720px) { .featured-body { padding: 32px 40px 40px; grid-template-columns: 1fr 1fr; } }
+.featured-body h4 { margin: 0 0 8px; font-size: 15px; color: var(--accent); }
+.featured-body ul { margin: 0; padding-left: 20px; }
+.featured-body li { margin-bottom: 6px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-size: 13px; padding: 2px 10px; border-radius: 8px; background: var(--surface-2); color: var(--text); font-family: var(--mono); }
+.more { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.note-private { font-size: 13px; color: var(--muted); }
+
+.cards { display: grid; gap: 24px; }
+@media (min-width: 720px) { .cards { grid-template-columns: 1fr 1fr; } }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 12px; }
+.card p { margin: 0; color: var(--muted); }
+.card .kv { display: flex; gap: 24px; flex-wrap: wrap; }
+.card .kv b { font-family: var(--mono); font-size: 22px; display: block; line-height: 1.3; }
+.card .kv span { font-size: 13px; color: var(--muted); }
+.card .links-row { margin-top: auto; display: flex; gap: 16px; flex-wrap: wrap; font-size: 15px; }
+
+/* strengths */
+.strengths { display: grid; gap: 16px; counter-reset: s; }
+@media (min-width: 720px) { .strengths { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .strengths { grid-template-columns: repeat(3, 1fr); } }
+.strength { padding: 24px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--border); counter-increment: s; }
+.strength::before { content: "0" counter(s); font-family: var(--mono); color: var(--accent); font-size: 13px; display: block; margin-bottom: 8px; }
+.strength p { margin: 0; color: var(--muted); font-size: 15px; }
+
+/* cycle */
+.cycle { list-style: none; padding: 0; margin: 0 0 32px; display: grid; gap: 8px; }
+@media (min-width: 860px) { .cycle { grid-template-columns: repeat(7, 1fr); } }
+.cycle li { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; font-size: 14px; }
+.cycle li b { display: block; font-size: 15px; margin-bottom: 2px; }
+.cycle li span { color: var(--muted); font-size: 13px; line-height: 1.6; display: block; }
+.cycle li .who { display: inline-block; margin-bottom: 4px; font-size: 11px; font-family: var(--mono); padding: 0 6px; border-radius: 6px; background: var(--surface-2); color: var(--muted); }
+.cycle li .who.human { background: var(--accent-soft); color: var(--accent); }
+.guards { width: 100%; border-collapse: collapse; font-size: 15px; background: var(--surface); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+.guards th, .guards td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.guards th { background: var(--surface-2); font-size: 13px; color: var(--muted); font-weight: 500; }
+.guards tr:last-child td { border-bottom: none; }
+@media (max-width: 719px) {
+  .guards thead { display: none; }
+  .guards tr { display: block; border-bottom: 1px solid var(--border); padding: 12px 16px; }
+  .guards td { display: block; padding: 0; border: none; }
+  .guards td:first-child { font-weight: 700; margin-bottom: 4px; }
+}
+.quote { margin: 24px 0 0; padding: 16px 20px; border-left: 3px solid var(--accent); background: var(--surface); border-radius: 0 12px 12px 0; }
+
+/* skills */
+.skills { display: grid; gap: 16px; }
+@media (min-width: 720px) { .skills { grid-template-columns: repeat(2, 1fr); } }
+.skill { padding: 20px 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+.skill h3 { font-size: 15px; color: var(--accent); }
+.skill p { margin: 8px 0 0; color: var(--muted); font-size: 14px; }
+
+/* screenshots */
+.shots { display: grid; gap: 16px; padding: 0 24px 24px; grid-template-columns: 1fr 1fr; }
+@media (min-width: 720px) { .shots { padding: 0 40px 32px; grid-template-columns: 3fr 1fr 1fr; align-items: start; } }
+.shot { display: block; text-decoration: none; color: var(--muted); font-size: 13px; }
+.shot img { display: block; width: 100%; height: auto; object-fit: cover; object-position: top; border: 1px solid var(--border); background: var(--surface-2); }
+.shot.pc { grid-column: 1 / -1; }
+@media (min-width: 720px) { .shot.pc { grid-column: auto; } }
+.shot.pc img { aspect-ratio: 16 / 10; border-radius: 12px; }
+.shot.sp img { aspect-ratio: 780 / 1290; border-radius: 20px; }
+.shot span, .thumbs span { display: block; margin-top: 6px; }
+.thumbs { display: flex; gap: 12px; overflow-x: auto; padding: 0 24px 24px; scroll-snap-type: x mandatory; scroll-padding-inline: 24px; -webkit-overflow-scrolling: touch; }
+@media (min-width: 720px) { .thumbs { padding: 0 40px 32px; scroll-padding-inline: 40px; } }
+.thumbs a { flex: 0 0 180px; text-decoration: none; color: var(--muted); font-size: 13px; scroll-snap-align: start; }
+@media (min-width: 720px) { .thumbs a { flex: 1 1 0; min-width: 0; } }
+.thumbs img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: 8px; border: 1px solid var(--border); background: var(--surface-2); }
+.shot:hover img, .thumbs a:hover img { border-color: var(--accent); }
+
+/* contact */
+.contact { display: grid; gap: 12px; }
+@media (min-width: 720px) { .contact { grid-template-columns: repeat(4, 1fr); } }
+.contact a { display: block; padding: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; color: var(--text); }
+.contact a:hover { border-color: var(--accent); }
+.contact small { display: block; color: var(--muted); font-size: 13px; }
+.contact strong { font-size: 15px; word-break: break-all; }
+.repo-name { font-size: .5em; font-weight: 500; color: var(--muted); }
+.chips.full { grid-column: 1 / -1; }
+.mb16 { margin-bottom: 16px; }
+.mt24 { margin-top: 24px; }
+footer { padding: 40px 0 56px; color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">Matsushima-A-830</a>
+    <nav class="links" aria-label="ページ内">
+      <a href="#projects">Projects</a>
+      <a class="opt" href="#strengths">Strengths</a>
+      <a class="opt" href="#ai">AI協働</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="theme-btn" id="theme" type="button" aria-label="ライト/ダークを切り替え"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg></button>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <p class="eyebrow">Portfolio · ITエンジニア1年目</p>
+    <h1><span>設計をドキュメントで固め、</span><br><span>テストとCIで守り、</span><br><em>AIと分業して速く回す。</em></h1>
+    <p class="lead">業務ではマイクロサービス構成のシステムでフロントエンド・バックエンド・DBを横断して担当しています。業務外では、カフェ特化SNS「ミツカフェ」を企画から本番運用まで一人で開発しています。</p>
+    <div class="cta">
+      <a class="btn primary" href="#projects">プロジェクトを見る ↓</a>
+      <a class="btn" href="https://github.com/Matsushima-A-830">GitHub</a>
+      <a class="btn" href="https://zenn.dev/matsushima_a">Zenn</a>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap about">
+      <div>
+        <h2>About</h2>
+        <p>ITエンジニア1年目です。現職ではマイクロサービス構成のシステムで、フロントエンド・バックエンド・DBの各領域を担当し、設計にも一部関わっています。</p>
+        <p>個人開発では、プロダクトの戦略を言語化するところから、データモデル・画面設計・実装・テスト・CI/CD・本番運用・障害対応までを一人で回しています。あわせて、海外のAI技術を毎日実際に動かして検証し、日本語で発信する活動も続けています。</p>
+        <p>職種は1つに絞らず、領域を横断してプロダクトに一貫して関われる環境を探しています。</p>
+      </div>
+      <div class="facts">
+        <dl>
+          <dt>現職</dt><dd>ITエンジニア（FE / BE / DB、設計の一部）</dd>
+          <dt>経験</dt><dd>1年目</dd>
+          <dt>個人開発</dt><dd>Webサービスを1件、本番で運用中</dd>
+          <dt>発信</dt><dd>AI検証を毎日（2026-11-23 時点で56日）</dd>
+          <dt>環境</dt><dd>WSL2 / RTX 5060 Ti 16GB</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <h2>Projects</h2>
+      <p class="sub">中心はミツカフェ。残りの2つでは、AI・LLMを自分の手で動かして検証しています。</p>
+
+      <article class="featured">
+        <div class="featured-head">
+          <span class="tag">Main</span><span class="tag ghost">本番稼働中（招待制ベータ）</span>
+          <h3>ミツカフェ <small class="repo-name">cafe_sns_site</small></h3>
+          <p class="tagline">「気分で見つかる、行きつけと繋がる」— カフェ好きのためのSNS</p>
+          <p class="desc">Instagramのような「映え」や「フォローの近況」ではなく、「ひとりで集中したい」「雨の日にのんびりしたい」といった<strong>気分</strong>からカフェに出会えて、個人経営のカフェと<strong>常連</strong>の関係を育てられる場を目指しています。2026年9月に着手し、企画・設計・実装・運用をすべて一人で担当しています（実装はClaude Codeと協働）。</p>
+        </div>
+        <div class="shots" aria-label="ミツカフェの画面">
+          <a class="shot pc" href="assets/mitsu-cafe/pc-home.webp" target="_blank" rel="noopener">
+            <img src="assets/mitsu-cafe/pc-home.webp" alt="PC版ホーム。上部に「今、どんなカフェ気分？」の気分タグが並び、その下に投稿カードが3列で並ぶ" width="1440" height="1100" loading="lazy">
+            <span>ホーム — 気分から探す</span>
+          </a>
+          <a class="shot sp" href="assets/mitsu-cafe/mobile-home-loggedin.webp" target="_blank" rel="noopener">
+            <img src="assets/mitsu-cafe/mobile-home-loggedin.webp" alt="スマホ版ホーム（ログイン後）。発見タブとフォロー中タブ、投稿カード、下部ナビ" width="780" height="1556" loading="lazy">
+            <span>スマホ</span>
+          </a>
+          <a class="shot sp" href="assets/mitsu-cafe/mobile-owner-dashboard.webp" target="_blank" rel="noopener">
+            <img src="assets/mitsu-cafe/mobile-owner-dashboard.webp" alt="オーナーダッシュボード。今週の投稿数・いいね・保存と、公式投稿・常連さん管理などのメニュー" width="780" height="1290" loading="lazy">
+            <span>オーナー向け</span>
+          </a>
+        </div>
+        <div class="thumbs">
+          <a href="assets/mitsu-cafe/pc-cafe-detail.webp" target="_blank" rel="noopener"><img src="assets/mitsu-cafe/pc-cafe-detail.webp" alt="カフェ詳細。オーナーの公式投稿、営業時間、地図、混雑度" loading="lazy"><span>カフェ詳細</span></a>
+          <a href="assets/mitsu-cafe/pc-map.webp" target="_blank" rel="noopener"><img src="assets/mitsu-cafe/pc-map.webp" alt="地図画面。エリア・雰囲気・利用機会で絞り込むカフェ一覧と Google マップ" loading="lazy"><span>地図</span></a>
+          <a href="assets/mitsu-cafe/pc-post-blog.webp" target="_blank" rel="noopener"><img src="assets/mitsu-cafe/pc-post-blog.webp" alt="ブログ形式の投稿とコメント" loading="lazy"><span>ブログ投稿</span></a>
+          <a href="assets/mitsu-cafe/pc-owner-analytics.webp" target="_blank" rel="noopener"><img src="assets/mitsu-cafe/pc-owner-analytics.webp" alt="オーナー向け投稿分析。投稿数・いいね・保存の推移グラフ" loading="lazy"><span>投稿分析</span></a>
+          <a href="assets/mitsu-cafe/pc-badges.webp" target="_blank" rel="noopener"><img src="assets/mitsu-cafe/pc-badges.webp" alt="バッジ一覧。街歩き上手、東京23区制覇などの進捗" loading="lazy"><span>バッジ</span></a>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>37/37</b><span>画面（設計 / 実装）</span></div>
+          <div class="stat"><b>27 · 74</b><span>テーブル · マイグレーション</span></div>
+          <div class="stat"><b>184</b><span>テストファイル（統合49 / E2E26）</span></div>
+          <div class="stat"><b>144</b><span>マージ済み PR</span></div>
+        </div>
+        <div class="featured-body">
+          <div>
+            <h4>設計で考えたこと</h4>
+            <ul>
+              <li>差別化の軸を「気分起点の発見」と「オーナーとの信頼」の2本に絞り、<strong>やらないこと</strong>（DM・映えフィルタ等）も明文化</li>
+              <li>認可を<strong>RLSに集約</strong>（全27テーブルでポリシー100超）。アプリ層は入力検証だけ</li>
+              <li>未成年向けに年齢確認・保護者同意フロー、EXIF（位置情報）の<strong>サーバー側での再検証</strong></li>
+              <li>損失回避・デフォルト効果などの行動経済学をUIに落とす</li>
+            </ul>
+          </div>
+          <div>
+            <h4>品質と運用</h4>
+            <ul>
+              <li>TDDを軸に、ユニット・統合（実DB）・E2E（4ブラウザ）の3層でテスト</li>
+              <li>デザインシステム違反を検出する独自Lintを、CIとpre-commitの両方で実行</li>
+              <li>本番DBマイグレーションは手動承認ゲートを通す。夜間にSafari E2Eとスキーマのドリフトを検査</li>
+              <li>本番で起きた障害を原因・対応・教訓まで記録</li>
+            </ul>
+          </div>
+          <div class="chips full">
+            <span class="chip">Next.js 16</span><span class="chip">React 19</span><span class="chip">TypeScript</span><span class="chip">Tailwind CSS</span><span class="chip">Supabase</span><span class="chip">PostgreSQL / RLS</span><span class="chip">PostGIS</span><span class="chip">Zod</span><span class="chip">Vitest</span><span class="chip">Playwright</span><span class="chip">GitHub Actions</span><span class="chip">Vercel</span><span class="chip">Sentry</span>
+          </div>
+          <div class="more">
+            <a class="btn primary" href="https://github.com/Matsushima-A-830/portfolio/blob/main/projects/mitsu-cafe.md">ケーススタディを読む →</a>
+            <span class="note-private">ソースコードと稼働中の環境は非公開です。選考の場では画面共有でデモできます。</span>
+          </div>
+        </div>
+      </article>
+
+      <div class="cards">
+        <article class="card">
+          <div><span class="tag ghost">Public</span><span class="tag ghost">継続中</span></div>
+          <h3>ai-100days — 海外AIネタ100日チャレンジ</h3>
+          <p>海外で話題のAI関連OSS・論文を<strong>毎日1件、実際に動かして検証</strong>し、Zenn・note・Xで発信しています。リサーチと下書きは自動化し、確認・公開の判断は人間がする、という分担をすべてPRで回しています。</p>
+          <div class="kv">
+            <div><b>56日</b><span>検証済み（11/23時点）</span></div>
+            <div><b>192</b><span>マージ済み PR</span></div>
+          </div>
+          <p>例: 「4GB GPUで学習できる」というOSSは学習は動いたが出力が空だった／公式配布の量子化モデルの中にロードできても1問も解けないものがあった。</p>
+          <div class="links-row">
+            <a href="https://github.com/Matsushima-A-830/portfolio/blob/main/projects/ai-100days.md">詳しく →</a>
+            <a href="https://github.com/Matsushima-A-830/ai-100days">リポジトリ</a>
+            <a href="https://zenn.dev/matsushima_a">Zenn</a>
+          </div>
+        </article>
+        <article class="card">
+          <div><span class="tag ghost">Public</span><span class="tag ghost">MIT</span><span class="tag ghost">実験中</span></div>
+          <h3>forget-bench — LLMの「覚える力・忘れる力」</h3>
+          <p>LLMエージェントのメモリ戦略（要約・RAG・KVキャッシュの切除など）を、同じ正解付きシナリオで比較するベンチマークです。採点はLLMにさせず決定的なコードで行い、全数値にseed・モデルのrevision・commitを記録しています。</p>
+          <div class="kv">
+            <div><b>12</b><span>比較した戦略</span></div>
+            <div><b>5,502</b><span>リクエスト・エラー0</span></div>
+          </div>
+          <p>途中経過: KVキャッシュから該当範囲を切除すると、削除を頼んだ情報の漏洩は全規模で0%になった。</p>
+          <div class="links-row">
+            <a href="https://github.com/Matsushima-A-830/portfolio/blob/main/projects/forget-bench.md">詳しく →</a>
+            <a href="https://github.com/Matsushima-A-830/forget-bench">リポジトリ</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="strengths">
+    <div class="wrap">
+      <h2>Strengths</h2>
+      <p class="sub">3つのプロジェクトに共通する仕事の進め方です。</p>
+      <div class="strengths">
+        <div class="strength"><h3>戦略から設計する</h3><p>差別化の軸を先に言語化し、機能の判断はそこに立ち返る。「やらないこと」も決める。</p></div>
+        <div class="strength"><h3>品質を仕組みで担保する</h3><p>TDD、Zodによる境界での検証、RLS、エラーカタログ、独自Lint。お願いではなく機械で止める。</p></div>
+        <div class="strength"><h3>障害を記録して再発を防ぐ</h3><p>全ユーザーに影響した認証の不具合、数日気づかなかった定期ジョブの失敗。原因と教訓まで残す。</p></div>
+        <div class="strength"><h3>AIと安全に分業する</h3><p>判断は人、作業はAI。無人で動くエージェントは、権限を持たせないことで制御する。</p></div>
+        <div class="strength"><h3>計測し、正直に書く</h3><p>CIの課金分を分単位で実測して削る。動かしていないものを「動いた」と書かない。</p></div>
+        <div class="strength"><h3>新しい技術を1日で動かす</h3><p>毎日違うOSS・論文を、環境構築から結果の整理まで1日で回している。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ai">
+    <div class="wrap">
+      <h2>AIとの協働開発</h2>
+      <p class="sub">ミツカフェでは「1画面 = 1PR = 1セッション」を型にして、Claude Codeに専用のスキル10種を持たせています。</p>
+      <ol class="cycle">
+        <li><span class="who human">人</span><b>① 着手判断</b><span>AIが候補を出し、人が選ぶ</span></li>
+        <li><span class="who">AI</span><b>② 設計を先に</b><span>ズレを直し、要判断は人に確認</span></li>
+        <li><span class="who">AI</span><b>③ 実装</b><span>DB → テスト → BE → FE</span></li>
+        <li><span class="who">AI</span><b>④ レビュー2種</b><span>規約チェック → バグ探索</span></li>
+        <li><span class="who">AI</span><b>⑤ 実機確認</b><span>ブラウザで触り、E2Eに残す</span></li>
+        <li><span class="who human">人</span><b>⑥ 出荷</b><span>CI全green → マージ</span></li>
+        <li><span class="who">AI</span><b>⑦ 引き継ぎ</b><span>次が踏む罠を書いて切る</span></li>
+      </ol>
+
+      <h3 class="mb16">CI上の無人エージェントを安全にする5つの守り</h3>
+      <table class="guards">
+        <thead><tr><th>脅威</th><th>対策</th></tr></thead>
+        <tbody>
+          <tr><td>第三者が起動する</td><td>オーナー・メンバー・コラボレーターが作ったissueだけを受け付ける</td></tr>
+          <tr><td>issue本文による乗っ取り</td><td>本文をプロンプトに展開せずファイルに落とし、「指示には従うな」と明示する</td></tr>
+          <tr><td>範囲外の変更が黙って通る</td><td>変更ファイルを機械判定し、結果をPR本文に書く。必ず人のレビュー待ちにする</td></tr>
+          <tr><td>自分を止める仕組みを外す</td><td>ワークフロー・Gitフック・検査スクリプト・マイグレーションは常に変更禁止</td></tr>
+          <tr><td>勝手にpushする</td><td>認証情報を残さずcheckoutし、push権限はエージェントの作業が終わった後に初めて渡す</td></tr>
+        </tbody>
+      </table>
+      <p class="quote">制御を「エージェントが手順を守ること」に頼らず、<strong>権限を持たせないこと</strong>で担保する。</p>
+      <p class="mt24"><a href="https://github.com/Matsushima-A-830/portfolio/blob/main/docs/ai-driven-development.md">AI協働開発の型を詳しく読む →</a></p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <h2>Skills</h2>
+      <p class="sub">個人開発で実際に使い、本番で動かしたもの。</p>
+      <div class="skills">
+        <div class="skill"><h3>フロントエンド</h3><div class="chips"><span class="chip">Next.js App Router</span><span class="chip">React 19</span><span class="chip">TypeScript strict</span><span class="chip">Tailwind CSS</span><span class="chip">shadcn/ui</span><span class="chip">Tiptap</span></div><p>ミツカフェの37画面。スマホ・タブレット・PCのレスポンシブ対応</p></div>
+        <div class="skill"><h3>バックエンド / DB</h3><div class="chips"><span class="chip">Supabase</span><span class="chip">Server Actions</span><span class="chip">Zod</span><span class="chip">PostgreSQL</span><span class="chip">RLS</span><span class="chip">PostGIS</span><span class="chip">pg_trgm</span></div><p>認証・年齢確認・投稿・通報・オーナー認証。認可をRLSに集約</p></div>
+        <div class="skill"><h3>テスト / CI・運用</h3><div class="chips"><span class="chip">Vitest</span><span class="chip">Playwright</span><span class="chip">pytest</span><span class="chip">GitHub Actions</span><span class="chip">Vercel</span><span class="chip">Sentry</span><span class="chip">lefthook</span></div><p>3層のテスト、承認ゲート付きマイグレーション、夜間ジョブ、日次バッチ</p></div>
+        <div class="skill"><h3>AI / LLM</h3><div class="chips"><span class="chip">Claude Code</span><span class="chip">Ollama</span><span class="chip">transformers</span><span class="chip">RAG</span><span class="chip">KVキャッシュ</span><span class="chip">Python / uv</span></div><p>AI協働開発、自動検証パイプライン、メモリ戦略のベンチマーク</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <p class="sub">お気軽にご連絡ください。</p>
+      <div class="contact">
+        <a href="mailto:matsu120a40@gmail.com"><small>Email</small><strong>matsu120a40@gmail.com</strong></a>
+        <a href="https://github.com/Matsushima-A-830"><small>GitHub</small><strong>@Matsushima-A-830</strong></a>
+        <a href="https://zenn.dev/matsushima_a"><small>Zenn（技術記事）</small><strong>matsushima_a</strong></a>
+        <a href="https://note.com/regal_poppy7370"><small>note（経緯・振り返り）</small><strong>regal_poppy7370</strong></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">数値は 2026-11-23 時点。ソースは <a href="https://github.com/Matsushima-A-830/portfolio">GitHub</a> で公開しています。</div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement, btn = document.getElementById('theme');
+  try { var saved = localStorage.getItem('theme'); if (saved) root.setAttribute('data-theme', saved); } catch (e) {}
+  btn.addEventListener('click', function () {
+    var cur = root.getAttribute('data-theme') ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
+})();
+</script>
+</body>
+</html>
