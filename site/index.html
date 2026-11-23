@@ -201,6 +201,23 @@ h3 { font-size: 18px; margin: 0 0 8px; line-height: 1.5; }
 .skill h3 { font-size: 15px; color: var(--accent); }
 .skill p { margin: 8px 0 0; color: var(--muted); font-size: 14px; }
 
+/* screenshots */
+.shots { display: grid; gap: 16px; padding: 0 24px 24px; grid-template-columns: 1fr 1fr; }
+@media (min-width: 720px) { .shots { padding: 0 40px 32px; grid-template-columns: 3fr 1fr 1fr; align-items: start; } }
+.shot { display: block; text-decoration: none; color: var(--muted); font-size: 13px; }
+.shot img { display: block; width: 100%; height: auto; object-fit: cover; object-position: top; border: 1px solid var(--border); background: var(--surface-2); }
+.shot.pc { grid-column: 1 / -1; }
+@media (min-width: 720px) { .shot.pc { grid-column: auto; } }
+.shot.pc img { aspect-ratio: 16 / 10; border-radius: 12px; }
+.shot.sp img { aspect-ratio: 780 / 1290; border-radius: 20px; }
+.shot span, .thumbs span { display: block; margin-top: 6px; }
+.thumbs { display: flex; gap: 12px; overflow-x: auto; padding: 0 24px 24px; scroll-snap-type: x mandatory; scroll-padding-inline: 24px; -webkit-overflow-scrolling: touch; }
+@media (min-width: 720px) { .thumbs { padding: 0 40px 32px; scroll-padding-inline: 40px; } }
+.thumbs a { flex: 0 0 180px; text-decoration: none; color: var(--muted); font-size: 13px; scroll-snap-align: start; }
+@media (min-width: 720px) { .thumbs a { flex: 1 1 0; min-width: 0; } }
+.thumbs img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: 8px; border: 1px solid var(--border); background: var(--surface-2); }
+.shot:hover img, .thumbs a:hover img { border-color: var(--accent); }
+
 /* contact */
 .contact { display: grid; gap: 12px; }
 @media (min-width: 720px) { .contact { grid-template-columns: repeat(4, 1fr); } }
@@ -272,6 +289,27 @@ footer { padding: 40px 0 56px; color: var(--muted); font-size: 13px; }
           <h3>ミツカフェ <small class="repo-name">cafe_sns_site</small></h3>
           <p class="tagline">「気分で見つかる、行きつけと繋がる」— カフェ好きのためのSNS</p>
           <p class="desc">Instagramのような「映え」や「フォローの近況」ではなく、「ひとりで集中したい」「雨の日にのんびりしたい」といった<strong>気分</strong>からカフェに出会えて、個人経営のカフェと<strong>常連</strong>の関係を育てられる場を目指しています。2026年9月に着手し、企画・設計・実装・運用をすべて一人で担当しています（実装はClaude Codeと協働）。</p>
+        </div>
+        <div class="shots" aria-label="ミツカフェの画面">
+          <a class="shot pc" href="assets/mitsu-cafe/pc-home.webp" target="_blank" rel="noopener">
+            <img src="assets/mitsu-cafe/pc-home.webp" alt="PC版ホーム。上部に「今、どんなカフェ気分？」の気分タグが並び、その下に投稿カードが3列で並ぶ" width="1440" height="1100" loading="lazy">
+            <span>ホーム — 気分から探す</span>
+          </a>
+          <a class="shot sp" href="assets/mitsu-cafe/mobile-home-loggedin.webp" target="_blank" rel="noopener">
+            <img src="assets/mitsu-cafe/mobile-home-loggedin.webp" alt="スマホ版ホーム（ログイン後）。発見タブとフォロー中タブ、投稿カード、下部ナビ" width="780" height="1556" loading="lazy">
+            <span>スマホ</span>
+          </a>
+          <a class="shot sp" href="assets/mitsu-cafe/mobile-owner-dashboard.webp" target="_blank" rel="noopener">
+            <img src="assets/mitsu-cafe/mobile-owner-dashboard.webp" alt="オーナーダッシュボード。今週の投稿数・いいね・保存と、公式投稿・常連さん管理などのメニュー" width="780" height="1290" loading="lazy">
+            <span>オーナー向け</span>
+          </a>
+        </div>
+        <div class="thumbs">
+          <a href="assets/mitsu-cafe/pc-cafe-detail.webp" target="_blank" rel="noopener"><img src="assets/mitsu-cafe/pc-cafe-detail.webp" alt="カフェ詳細。オーナーの公式投稿、営業時間、地図、混雑度" loading="lazy"><span>カフェ詳細</span></a>
+          <a href="assets/mitsu-cafe/pc-map.webp" target="_blank" rel="noopener"><img src="assets/mitsu-cafe/pc-map.webp" alt="地図画面。エリア・雰囲気・利用機会で絞り込むカフェ一覧と Google マップ" loading="lazy"><span>地図</span></a>
+          <a href="assets/mitsu-cafe/pc-post-blog.webp" target="_blank" rel="noopener"><img src="assets/mitsu-cafe/pc-post-blog.webp" alt="ブログ形式の投稿とコメント" loading="lazy"><span>ブログ投稿</span></a>
+          <a href="assets/mitsu-cafe/pc-owner-analytics.webp" target="_blank" rel="noopener"><img src="assets/mitsu-cafe/pc-owner-analytics.webp" alt="オーナー向け投稿分析。投稿数・いいね・保存の推移グラフ" loading="lazy"><span>投稿分析</span></a>
+          <a href="assets/mitsu-cafe/pc-badges.webp" target="_blank" rel="noopener"><img src="assets/mitsu-cafe/pc-badges.webp" alt="バッジ一覧。街歩き上手、東京23区制覇などの進捗" loading="lazy"><span>バッジ</span></a>
         </div>
         <div class="stats">
           <div class="stat"><b>37/37</b><span>画面（設計 / 実装）</span></div>
